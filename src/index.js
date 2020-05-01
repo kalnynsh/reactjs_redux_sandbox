@@ -16,33 +16,39 @@ const reducer = (state = 0, action) => {
 
 const store = createStore(reducer);
 
-const incr = () => store.dispatch({type: 'INC'});
-const decr = () =>  store.dispatch({type: 'DEC'});
-const rnd = () =>  {
-    const payload = Math.floor(Math.random() * 10 + 1);
+const inc = () => ({type: 'INC'});
 
-    store.dispatch({
+const dec = () => ({type: 'DEC'});
+
+const rnd = (payload) => {
+    return {
         type: 'RND',
         payload
-    });
+    };
 };
+
+const doIncr = () => store.dispatch(inc());
+const doDecr = () => store.dispatch(dec());
+
+const payload = Math.floor(Math.random() * 10 + 1);
+const doRnd = () => store.dispatch(rnd(payload));
 
 document
     .getElementById('inc')
-    .addEventListener('click', incr);
+    .addEventListener('click', doIncr);
 
 document
     .getElementById('dec')
-    .addEventListener('click', decr);
+    .addEventListener('click', doDecr);
 
 document
     .getElementById('rnd')
-    .addEventListener('click', rnd);
+    .addEventListener('click', doRnd);
 
 const update = () => {
     document
         .getElementById('counter')
-        .innerHTML = store.getState()
+        .innerText = store.getState()
     ;
 };
 
