@@ -2,10 +2,11 @@ const inc = () => ({type: 'INC'});
 
 const dec = () => ({type: 'DEC'});
 
-const rnd = (payload) => {
+const rnd = () => {
+
     return {
         type: 'RND',
-        payload
+        payload: Math.floor( Math.random()*10 + 1 ),
     };
 };
 
